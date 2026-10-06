@@ -1,0 +1,848 @@
+/* =====================================================
+   ECOCYCLE - ADMIN DASHBOARD
+===================================================== */
+
+.admin-dashboard {
+  max-width: 1280px;
+
+  margin: auto;
+
+  padding: 45px 35px;
+}
+
+
+/* =====================================================
+   ADMIN WELCOME
+===================================================== */
+
+.admin-welcome {
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(74, 222, 128, 0.18),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #123c22,
+      #166534
+    );
+
+  color: white;
+
+  padding: 32px;
+
+  border-radius: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 30px;
+
+  box-shadow:
+    0 12px 30px rgba(20, 83, 45, 0.18);
+}
+
+.admin-label {
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  color: #86efac;
+
+  font-weight: 800;
+}
+
+.admin-welcome h1 {
+  margin: 8px 0;
+
+  font-size: 32px;
+
+  color: white;
+}
+
+.admin-welcome p {
+  margin: 0;
+
+  color: #d1fae5;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   ADMIN PROFILE
+===================================================== */
+
+.admin-profile {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 12px 18px;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 12px;
+}
+
+.admin-profile strong {
+  display: block;
+
+  font-size: 14px;
+}
+
+.admin-profile span {
+  display: block;
+
+  font-size: 12px;
+
+  color: #bbf7d0;
+
+  margin-top: 3px;
+}
+
+.admin-avatar {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+
+  border-radius: 50%;
+
+  font-size: 22px;
+}
+
+
+/* =====================================================
+   SECTION HEADINGS
+===================================================== */
+
+.admin-section {
+  margin-bottom: 32px;
+}
+
+.section-heading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 17px;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  font-size: 21px;
+
+  color: #17231a;
+}
+
+.section-heading p {
+  margin: 4px 0 0;
+
+  color: #738078;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   MAIN STATISTICS
+===================================================== */
+
+.admin-stats {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.admin-stat-card {
+  background: white;
+
+  border: 1px solid #e2ebe4;
+
+  border-radius: 14px;
+
+  padding: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  box-shadow:
+    0 6px 20px rgba(20, 60, 35, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 28px rgba(20, 60, 35, 0.1);
+}
+
+
+/* =====================================================
+   STAT ICONS
+===================================================== */
+
+.admin-stat-icon {
+  width: 52px;
+  height: 52px;
+
+  min-width: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  font-size: 23px;
+}
+
+.admin-stat-icon.green {
+  background: #dcfce7;
+}
+
+.admin-stat-icon.blue {
+  background: #dbeafe;
+}
+
+.admin-stat-icon.orange {
+  background: #ffedd5;
+}
+
+.admin-stat-icon.purple {
+  background: #f3e8ff;
+}
+
+
+/* =====================================================
+   STAT TEXT
+===================================================== */
+
+.admin-stat-card span {
+  display: block;
+
+  color: #68756d;
+
+  font-size: 12px;
+}
+
+.admin-stat-card h3 {
+  margin: 4px 0;
+
+  font-size: 26px;
+
+  color: #14532d;
+}
+
+.admin-stat-card small {
+  color: #89948d;
+
+  font-size: 11px;
+}
+
+
+/* =====================================================
+   SECONDARY STATISTICS
+===================================================== */
+
+.admin-secondary-stats {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 35px;
+}
+
+.secondary-card {
+  background: white;
+
+  padding: 19px 22px;
+
+  border-radius: 13px;
+
+  border: 1px solid #e2ebe4;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  box-shadow:
+    0 5px 18px rgba(20, 60, 35, 0.04);
+}
+
+.secondary-icon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #ecfdf5;
+
+  font-size: 20px;
+}
+
+.secondary-card span {
+  display: block;
+
+  color: #77827b;
+
+  font-size: 12px;
+}
+
+.secondary-card strong {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #14532d;
+
+  font-size: 19px;
+}
+
+
+/* =====================================================
+   MAIN ADMIN CONTENT
+===================================================== */
+
+.admin-content-grid {
+  display: grid;
+
+  grid-template-columns: 1.15fr 0.85fr;
+
+  gap: 20px;
+
+  margin-bottom: 35px;
+}
+
+.admin-panel {
+  background: white;
+
+  border: 1px solid #e2ebe4;
+
+  border-radius: 15px;
+
+  padding: 25px;
+
+  box-shadow:
+    0 6px 20px rgba(20, 60, 35, 0.05);
+}
+
+.panel-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.panel-header h2 {
+  margin: 0;
+
+  font-size: 19px;
+
+  color: #17231a;
+}
+
+.panel-header p {
+  margin: 5px 0 0;
+
+  color: #7b867f;
+
+  font-size: 12px;
+}
+
+.panel-badge {
+  background: #dcfce7;
+
+  color: #15803d;
+
+  padding: 7px 11px;
+
+  border-radius: 20px;
+
+  font-weight: 800;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   RECYCLING PROGRESS
+===================================================== */
+
+.progress-container {
+  margin-bottom: 25px;
+}
+
+.progress-label {
+  display: flex;
+
+  justify-content: space-between;
+
+  font-size: 13px;
+
+  margin-bottom: 9px;
+}
+
+.progress-label span {
+  color: #69756e;
+}
+
+.progress-label strong {
+  color: #166534;
+}
+
+.progress-bar {
+  width: 100%;
+
+  height: 10px;
+
+  background: #e8f0ea;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    #16a34a,
+    #4ade80
+  );
+
+  border-radius: 20px;
+}
+
+
+/* =====================================================
+   STATUS BREAKDOWN
+===================================================== */
+
+.status-breakdown {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 13px;
+}
+
+.status-breakdown div {
+  padding: 10px 12px;
+
+  background: #f8faf8;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+
+  color: #5f6b63;
+}
+
+.status-breakdown strong {
+  float: right;
+
+  color: #17231a;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+
+  display: inline-block;
+
+  border-radius: 50%;
+
+  margin-right: 7px;
+}
+
+.dot.pending {
+  background: #f59e0b;
+}
+
+.dot.accepted {
+  background: #3b82f6;
+}
+
+.dot.pickup {
+  background: #8b5cf6;
+}
+
+.dot.recycled {
+  background: #22c55e;
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.admin-actions {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.admin-actions button {
+  background: #f8faf8;
+
+  border: 1px solid #e6ede8;
+
+  border-radius: 10px;
+
+  padding: 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  text-align: left;
+
+  transition: 0.2s;
+}
+
+.admin-actions button:hover {
+  background: #f0fdf4;
+
+  border-color: #bbf7d0;
+
+  transform: translateX(3px);
+}
+
+.admin-actions button > span {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+
+  border-radius: 8px;
+
+  font-size: 18px;
+}
+
+.admin-actions button div {
+  flex: 1;
+}
+
+.admin-actions strong {
+  display: block;
+
+  color: #23402b;
+
+  font-size: 13px;
+}
+
+.admin-actions small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #879189;
+
+  font-size: 11px;
+}
+
+.admin-actions b {
+  color: #4b6352;
+
+  font-size: 17px;
+}
+
+
+/* =====================================================
+   RECENT ACTIVITY TABLE
+===================================================== */
+
+.activity-table {
+  background: white;
+
+  border: 1px solid #e2ebe4;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 6px 20px rgba(20, 60, 35, 0.05);
+}
+
+.activity-header,
+.activity-row {
+  display: grid;
+
+  grid-template-columns:
+    1.1fr
+    1.2fr
+    1fr
+    1.1fr
+    0.8fr;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 15px 20px;
+}
+
+.activity-header {
+  background: #f3f8f4;
+
+  color: #657169;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+.activity-row {
+  border-top: 1px solid #edf1ee;
+
+  color: #4b5750;
+
+  font-size: 12px;
+
+  transition: 0.2s;
+}
+
+.activity-row:hover {
+  background: #f8fcf9;
+}
+
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+
+.status {
+  width: fit-content;
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+.accepted-status {
+  background: #dbeafe;
+
+  color: #1d4ed8;
+}
+
+.pending-status {
+  background: #fef3c7;
+
+  color: #b45309;
+}
+
+.recycled-status {
+  background: #dcfce7;
+
+  color: #15803d;
+}
+
+.pickup-status {
+  background: #ede9fe;
+
+  color: #6d28d9;
+}
+
+
+/* =====================================================
+   VIEW ALL
+===================================================== */
+
+.view-all-button {
+  background: transparent;
+
+  color: #15803d;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.view-all-button:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================================
+   ADMIN BOTTOM BAR
+===================================================== */
+
+.admin-bottom {
+  margin-top: 30px;
+
+  padding: 20px 24px;
+
+  background: #ecfdf5;
+
+  border: 1px solid #bbf7d0;
+
+  border-radius: 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.admin-bottom strong {
+  display: block;
+
+  color: #14532d;
+
+  font-size: 14px;
+}
+
+.admin-bottom span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #66806e;
+
+  font-size: 12px;
+}
+
+.admin-logout {
+  background: #dc2626;
+
+  color: white;
+
+  padding: 10px 20px;
+
+  border-radius: 7px;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.admin-logout:hover {
+  background: #b91c1c;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1050px) {
+
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .admin-dashboard {
+    padding: 30px 18px;
+  }
+
+  .admin-welcome {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+  .admin-welcome h1 {
+    font-size: 27px;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-secondary-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .status-breakdown {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-table {
+    overflow-x: auto;
+  }
+
+  .activity-header,
+  .activity-row {
+    min-width: 700px;
+  }
+
+  .admin-bottom {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+  .admin-logout {
+    width: 100%;
+  }
+}

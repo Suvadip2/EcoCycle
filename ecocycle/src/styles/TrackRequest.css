@@ -1,0 +1,102 @@
+.track-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.track-heading {
+  margin-bottom: 30px;
+}
+
+.track-heading h2 {
+  margin: 0 0 8px;
+  font-size: 30px;
+}
+
+.track-heading p {
+  margin: 0;
+  color: #666;
+  font-size: 15px;
+}
+
+.track-details {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.track-details h3 {
+  margin: 0 0 25px;
+  font-size: 22px;
+}
+
+.track-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.track-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 15px;
+  background: #f7f9f8;
+  border-radius: 8px;
+}
+
+.track-info span {
+  font-size: 13px;
+  color: #777;
+}
+
+.track-info strong {
+  font-size: 15px;
+  color: #222;
+}
+
+.track-status {
+  margin-bottom: 30px;
+}
+
+.track-back-button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 7px;
+  background: #2e7d32;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.track-back-button:hover {
+  background: #256628;
+}
+
+.track-error {
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  background: #ffeaea;
+  color: #c62828;
+  border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+  .track-page {
+    padding: 25px 15px;
+  }
+
+  .track-heading h2 {
+    font-size: 25px;
+  }
+
+  .track-info {
+    grid-template-columns: 1fr;
+  }
+
+  .track-details {
+    padding: 20px;
+  }
+}

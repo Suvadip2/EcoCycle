@@ -1,0 +1,278 @@
+.submit-page {
+  min-height: 80vh;
+  padding: 50px 20px 70px;
+  background: #f6faf7;
+}
+
+.submit-container {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* Header */
+
+.submit-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.submit-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e2f4e8;
+  border-radius: 16px;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.submit-header h1 {
+  margin: 0 0 6px;
+  font-size: 30px;
+  color: #173b28;
+}
+
+.submit-header p {
+  margin: 0;
+  color: #68776e;
+  font-size: 15px;
+}
+
+/* Main Card */
+
+.submit-card {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e2ebe5;
+  border-radius: 18px;
+  padding: 34px;
+  box-shadow: 0 8px 30px rgba(28, 70, 43, 0.08);
+}
+
+/* Intro */
+
+.form-intro {
+  padding-bottom: 22px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #edf1ee;
+}
+
+.form-intro h2 {
+  margin: 0 0 6px;
+  font-size: 21px;
+  color: #1d3d2a;
+}
+
+.form-intro p {
+  margin: 0;
+  color: #78837c;
+  font-size: 14px;
+}
+
+/* Form */
+
+.submit-card form {
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #34443a;
+}
+
+.form-group label span {
+  color: #d9534f;
+  margin-left: 3px;
+}
+
+/* Inputs */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d6e0d9;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #ffffff;
+  color: #26352c;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #4d9b68;
+  box-shadow: 0 0 0 3px rgba(77, 155, 104, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #a2aaa5;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Quantity + Weight */
+
+.form-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-grid .form-group {
+  width: 100%;
+}
+
+/* Errors */
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #d9534f;
+}
+
+/* Alerts */
+
+.form-alert {
+  padding: 12px 15px;
+  border-radius: 9px;
+  margin-bottom: 22px;
+  font-size: 14px;
+}
+
+.form-alert.error {
+  background: #fff0f0;
+  color: #b53b3b;
+  border: 1px solid #f2caca;
+}
+
+.form-alert.success {
+  background: #edf9f0;
+  color: #287343;
+  border: 1px solid #c9e8d1;
+}
+
+/* Buttons */
+
+.form-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+  margin-top: 5px;
+}
+
+.cancel-button,
+.submit-button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cancel-button {
+  background: #f0f3f1;
+  color: #48544d;
+}
+
+.cancel-button:hover {
+  background: #e4e9e5;
+}
+
+.submit-button {
+  background: #348b55;
+  color: #ffffff;
+}
+
+.submit-button:hover {
+  background: #287744;
+  transform: translateY(-1px);
+}
+
+/* Bottom Note */
+
+.submit-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: #7b877f;
+  font-size: 12px;
+  text-align: center;
+}
+
+.submit-note p {
+  margin: 0;
+}
+
+.submit-note span {
+  font-size: 15px;
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .submit-page {
+    padding: 30px 15px 50px;
+  }
+
+  .submit-header {
+    align-items: flex-start;
+  }
+
+  .submit-header h1 {
+    font-size: 25px;
+  }
+
+  .submit-card {
+    padding: 22px;
+    border-radius: 14px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-button,
+  .submit-button {
+    width: 100%;
+  }
+}

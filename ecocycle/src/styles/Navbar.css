@@ -1,0 +1,74 @@
+.navbar {
+  min-height: 76px;
+  padding: 0 55px;
+  background: linear-gradient(135deg, #14532d, #166534);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 18px rgba(20, 83, 45, 0.18);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  text-decoration: none;
+}
+
+.logo::before {
+  content: "♻ ";
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links a,
+.nav-links button {
+  background: transparent;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.nav-links a:hover,
+.nav-links button:hover,
+.nav-links a.active {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.nav-logout {
+  border: none;
+  cursor: pointer;
+}
+
+.welcome-tag {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

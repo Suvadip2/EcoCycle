@@ -1,0 +1,402 @@
+/* =====================================================
+   ECOCYCLE - USER DASHBOARD
+===================================================== */
+
+.dashboard-page {
+  max-width: 1250px;
+  margin: auto;
+  padding: 45px 35px;
+}
+
+/* ================= DASHBOARD HEADER ================= */
+
+.dashboard-header {
+  padding: 30px;
+
+  margin-bottom: 28px;
+
+  border-radius: 18px;
+
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(74, 222, 128, 0.18),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #14532d,
+      #166534
+    );
+
+  color: white;
+
+  box-shadow:
+    0 12px 30px rgba(20, 83, 45, 0.18);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-header h1 {
+  margin: 0 0 8px;
+
+  color: white;
+
+  font-size: 32px;
+}
+
+.dashboard-header p {
+  margin: 0 0 5px;
+
+  font-size: 17px;
+
+  font-weight: 600;
+}
+
+.dashboard-header span {
+  color: #d1fae5;
+
+  font-size: 13px;
+}
+
+
+/* ================= STATISTICS ================= */
+
+.dashboard-stats {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 35px;
+}
+
+.stat-card {
+  background: white;
+
+  padding: 22px;
+
+  min-height: 120px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2ebe4;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  box-shadow:
+    0 7px 22px rgba(20, 60, 35, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 13px 28px rgba(20, 60, 35, 0.11);
+}
+
+
+/* ================= STAT ICON ================= */
+
+.stat-icon {
+  width: 52px;
+  height: 52px;
+
+  min-width: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #ecfdf5;
+
+  border-radius: 12px;
+
+  font-size: 24px;
+}
+
+
+/* ================= STAT TEXT ================= */
+
+.stat-card h3 {
+  margin: 0;
+
+  font-size: 27px;
+
+  color: #14532d;
+}
+
+.stat-card p {
+  margin: 4px 0 0;
+
+  color: #68756d;
+
+  font-size: 13px;
+}
+
+
+/* ================= DASHBOARD SECTIONS ================= */
+
+.dashboard-section {
+  margin-bottom: 35px;
+}
+
+.dashboard-section h2 {
+  margin: 0 0 17px;
+
+  color: #17231a;
+
+  font-size: 22px;
+}
+
+
+/* ================= ACTION GRID ================= */
+
+.action-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.action-card {
+  min-height: 165px;
+
+  padding: 24px;
+
+  background: white;
+
+  border: 1px solid #e2ebe4;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  text-align: left;
+
+  color: #222;
+
+  box-shadow:
+    0 7px 22px rgba(20, 60, 35, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+
+  background: #f0fdf4;
+
+  border-color: #bbf7d0;
+
+  box-shadow:
+    0 13px 28px rgba(20, 60, 35, 0.1);
+}
+
+
+/* ================= ACTION ICON ================= */
+
+.action-card span {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #ecfdf5;
+
+  border-radius: 12px;
+
+  font-size: 23px;
+
+  margin-bottom: 16px;
+}
+
+
+/* ================= ACTION TEXT ================= */
+
+.action-card strong {
+  color: #14532d;
+
+  font-size: 15px;
+
+  margin-bottom: 7px;
+}
+
+.action-card small {
+  color: #6b776e;
+
+  line-height: 1.5;
+
+  font-size: 12px;
+}
+
+
+/* ================= USER INFORMATION ================= */
+
+.user-info-card {
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 14px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 25px;
+
+  border: 1px solid #e2ebe4;
+
+  box-shadow:
+    0 7px 22px rgba(20, 60, 35, 0.05);
+}
+
+.user-info-card strong {
+  display: block;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.6px;
+
+  color: #6b776e;
+}
+
+.user-info-card p {
+  margin: 6px 0 0;
+
+  font-weight: 600;
+
+  color: #17231a;
+
+  font-size: 14px;
+}
+
+
+/* ================= LOGOUT ================= */
+
+.logout-section {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 25px;
+}
+
+.logout-button {
+  background: #dc2626;
+
+  color: white;
+
+  padding: 11px 24px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.logout-button:hover {
+  background: #b91c1c;
+
+  transform: translateY(-1px);
+}
+
+
+/* ================= EMPTY / LOADING ================= */
+
+.dashboard-message {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2ebe4;
+
+  text-align: center;
+
+  color: #68756d;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1050px) {
+
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .action-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .dashboard-page {
+    padding: 30px 18px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 27px;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .user-info-card {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .logout-section {
+    justify-content: stretch;
+  }
+
+  .logout-button {
+    width: 100%;
+  }
+}

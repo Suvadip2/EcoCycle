@@ -1,0 +1,18 @@
+# Dependencies and build output
+**/node_modules/
+**/target/
+**/dist/
+**/build/
+
+# Local application data and credentials
+ecocycle/db.json
+backend/src/main/resources/application.properties
+.env
+.env.*
+!.env.example
+
+# Logs and editor files
+*.log
+.DS_Store
+.idea/
+.vscode/

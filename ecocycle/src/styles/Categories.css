@@ -1,0 +1,167 @@
+.categories-page {
+  min-height: calc(100vh - 76px);
+
+  padding-bottom: 60px;
+}
+
+/* HEADER */
+
+.categories-hero {
+  text-align: center;
+
+  padding: 60px 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ecfdf5,
+      #f0fdf4
+    );
+}
+
+.categories-hero h1 {
+  margin: 0 0 12px;
+
+  font-size: 38px;
+
+  color: #14532d;
+}
+
+.categories-hero p {
+  margin: auto;
+
+  max-width: 650px;
+
+  color: #69756e;
+
+  line-height: 1.7;
+}
+
+/* CATEGORY GRID */
+
+.categories-container {
+  max-width: 1100px;
+
+  margin: auto;
+
+  padding: 55px 30px;
+}
+
+.category-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 22px;
+}
+
+.category-card {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 16px;
+
+  border: 1px solid #e0ebe3;
+
+  box-shadow:
+    0 8px 24px rgba(20, 60, 35, 0.05);
+
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    border-color 0.25s;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+
+  border-color: #86efac;
+
+  box-shadow:
+    0 16px 35px rgba(20, 60, 35, 0.1);
+}
+
+.category-icon {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #dcfce7;
+
+  border-radius: 15px;
+
+  font-size: 30px;
+
+  margin-bottom: 18px;
+}
+
+.category-card h2 {
+  margin: 0 0 10px;
+
+  font-size: 19px;
+
+  color: #14532d;
+}
+
+.category-card p {
+  margin: 0;
+
+  color: #6c786f;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+/* CTA */
+
+.categories-cta {
+  max-width: 1000px;
+
+  margin: 20px auto 0;
+
+  padding: 35px;
+
+  text-align: center;
+
+  border-radius: 16px;
+
+  background: #14532d;
+
+  color: white;
+}
+
+.categories-cta h2 {
+  margin: 0 0 8px;
+
+  color: white;
+}
+
+.categories-cta p {
+  margin: 0;
+
+  color: #d1fae5;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .categories-hero h1 {
+    font-size: 30px;
+  }
+}

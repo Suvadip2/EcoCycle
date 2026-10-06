@@ -1,0 +1,7 @@
+{
+  "/api/admin/requests": "/ewaste",
+  "/api/admin/users": "/users",
+  "/api/users/:userId/requests": "/ewaste?userId=:userId",
+  "/api/ewaste/:id": "/ewaste/:id",
+  "/api/ewaste": "/ewaste"
+}
