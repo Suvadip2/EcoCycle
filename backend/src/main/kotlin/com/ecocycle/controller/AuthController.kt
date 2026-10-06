@@ -1,9 +1,11 @@
 package com.ecocycle.controller
 
 import com.ecocycle.model.User
+import com.ecocycle.repository.EWasteRepository
 import com.ecocycle.repository.UserRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/auth")
 class AuthController(
     private val userRepository: UserRepository,
+    private val ewasteRepository: EWasteRepository,
     private val passwordEncoder: PasswordEncoder
 ) {
 
@@ -142,6 +145,7 @@ class AuthController(
     }
 
     @DeleteMapping("/users/{id}")
+    @Transactional
     fun deleteUser(
         @PathVariable id: Long,
         @RequestBody credentials: Map<String, String>
@@ -175,6 +179,16 @@ class AuthController(
                 .status(403)
                 .body(mapOf("message" to "Admin accounts cannot be deleted"))
         }
+
+        val requests = ewasteRepository.findByUserEmail(targetUser.get().email)
+        requests.forEach { request ->
+            request.userEmail = ""
+            request.description = ""
+            request.pickupAddress = ""
+            request.pickupCity = ""
+            request.pickupPincode = ""
+        }
+        ewasteRepository.saveAll(requests)
 
         userRepository.deleteById(id)
 

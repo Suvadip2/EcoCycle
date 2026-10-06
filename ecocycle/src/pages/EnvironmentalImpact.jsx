@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { getUserEWaste } from "../services/api";
-
-const impactFactors = {
-  Computers: 3.0,
-  "Mobile Devices": 2.0,
-  "Home Appliances": 1.5,
-  Accessories: 1.0,
-  Other: 1.2,
-};
+import { calculateCo2Saved } from "../utils/environmentalImpact";
 
 function EnvironmentalImpact() {
   const { currentUser } = useAuth();
@@ -60,28 +53,7 @@ function EnvironmentalImpact() {
             0
           );
 
-        /*
-         * Category-based environmental calculation.
-         *
-         * These are estimated demo factors and should
-         * not be treated as certified carbon calculations.
-         */
-        const co2Saved =
-          recycledRequests.reduce(
-            (total, item) => {
-
-              const factor =
-                impactFactors[item.category] || 1.2;
-
-              return (
-                total +
-                Number(item.weight || 0) *
-                factor
-              );
-
-            },
-            0
-          );
+        const co2Saved = calculateCo2Saved(list);
 
         setImpact({
           totalWeight,

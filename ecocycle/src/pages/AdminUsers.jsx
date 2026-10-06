@@ -28,7 +28,7 @@ function AdminUsers() {
 
   const handleDelete = async (user) => {
     const confirmed = window.confirm(
-      `Delete the account for ${user.name} (${user.email})? Their e-waste request history will be kept.`
+      `Delete the account for ${user.name} (${user.email})? Their personal request details will be removed while aggregate recycling totals are retained.`
     );
 
     if (!confirmed) {
