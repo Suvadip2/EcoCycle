@@ -1,6 +1,7 @@
 package com.ecocycle.model
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "ewaste_requests")
@@ -44,5 +45,15 @@ class EWasteRequest(
     var pickupCity: String = "",
 
     @Column(length = 10)
-    var pickupPincode: String = ""
-)
+    var pickupPincode: String = "",
+
+    @Column(name = "created_at", nullable = true, updatable = false)
+    var createdAt: LocalDateTime? = null
+) {
+    @PrePersist
+    fun setCreatedAt() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now()
+        }
+    }
+}

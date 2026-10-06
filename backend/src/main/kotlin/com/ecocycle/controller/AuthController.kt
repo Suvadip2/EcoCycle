@@ -126,7 +126,8 @@ class AuthController(
                 "name" to user.name,
                 "email" to user.email,
                 "phone" to user.phone,
-                "role" to user.role
+                "role" to user.role,
+                "createdAt" to user.createdAt
             )
         )
     }
@@ -141,7 +142,8 @@ class AuthController(
                 "name" to user.name,
                 "email" to user.email,
                 "phone" to user.phone,
-                "role" to user.role
+                "role" to user.role,
+                "createdAt" to user.createdAt
             )
         }
     }

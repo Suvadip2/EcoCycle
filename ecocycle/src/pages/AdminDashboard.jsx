@@ -257,8 +257,8 @@ function AdminDashboard({ setCurrentPage }) {
                 <span>{request.status}</span>
                 <span>
                   {request.createdAt
-                    ? new Date(request.createdAt).toLocaleDateString()
-                    : "—"}
+                    ? new Date(request.createdAt).toLocaleString()
+                    : "Not recorded"}
                 </span>
               </div>
             ))

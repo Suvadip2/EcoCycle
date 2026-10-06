@@ -37,7 +37,11 @@ function RequestTable({ requests = [], onView, onDelete, canDelete = false }) {
                     {request.status}
                   </span>
                 </td>
-                <td>{new Date(request.createdAt || Date.now()).toLocaleDateString()}</td>
+                <td>
+                  {request.createdAt
+                    ? new Date(request.createdAt).toLocaleString()
+                    : "Not recorded"}
+                </td>
                 <td className="table-actions">
                   <button type="button" className="small-button" onClick={() => onView(request)}>
                     View

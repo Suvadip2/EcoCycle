@@ -1,6 +1,7 @@
 package com.ecocycle.model
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "users")
@@ -23,5 +24,15 @@ class User(
     var phone: String = "",
 
     @Column(nullable = false)
-    var role: String = "USER"
-)
+    var role: String = "USER",
+
+    @Column(name = "created_at", nullable = true, updatable = false)
+    var createdAt: LocalDateTime? = null
+) {
+    @PrePersist
+    fun setCreatedAt() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now()
+        }
+    }
+}

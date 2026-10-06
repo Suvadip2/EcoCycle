@@ -127,10 +127,8 @@ function AdminUsers() {
 
                   <td>
                     {user.createdAt
-                      ? new Date(
-                          user.createdAt
-                        ).toLocaleDateString()
-                      : "—"}
+                      ? new Date(user.createdAt).toLocaleString()
+                      : "Not recorded"}
                   </td>
 
                   <td>
