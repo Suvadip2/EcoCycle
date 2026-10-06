@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(() => {
 
     const savedUser =
-      localStorage.getItem("currentUser");
+      sessionStorage.getItem("currentUser");
 
     return savedUser
       ? JSON.parse(savedUser)
@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
 
     setCurrentUser(user);
 
-    localStorage.setItem(
+    sessionStorage.setItem(
       "currentUser",
       JSON.stringify(user)
     );
@@ -34,11 +34,11 @@ export function AuthProvider({ children }) {
 
     setCurrentUser(null);
 
-    localStorage.removeItem("currentUser");
+    sessionStorage.removeItem("currentUser");
 
-    localStorage.removeItem("currentPage");
+    sessionStorage.removeItem("currentPage");
 
-    localStorage.removeItem("selectedRequestId");
+    sessionStorage.removeItem("selectedRequestId");
   };
 
 

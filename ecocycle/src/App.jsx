@@ -23,12 +23,13 @@ import AdminUsers from "./pages/AdminUsers";
 import { useAuth } from "./context/AuthContext";
 
 function App() {
-  const [currentPage, setCurrentPageState] = useState(
-    localStorage.getItem("currentPage") || "home"
-  );
+  const [currentPage, setCurrentPageState] = useState(() => {
+    const pageFromUrl = window.location.hash.replace("#", "");
+    return pageFromUrl || sessionStorage.getItem("currentPage") || "home";
+  });
 
   const [selectedRequestId, setSelectedRequestId] = useState(() => {
-    const savedId = localStorage.getItem("selectedRequestId");
+    const savedId = sessionStorage.getItem("selectedRequestId");
 
     return savedId ? Number(savedId) : null;
   });
@@ -43,7 +44,7 @@ function App() {
   const setCurrentPage = (page) => {
     setCurrentPageState(page);
 
-    localStorage.setItem(
+    sessionStorage.setItem(
       "currentPage",
       page
     );
@@ -68,7 +69,7 @@ function App() {
           event.state.page
         );
 
-        localStorage.setItem(
+        sessionStorage.setItem(
           "currentPage",
           event.state.page
         );
@@ -84,14 +85,14 @@ function App() {
       if (hash) {
         setCurrentPageState(hash);
 
-        localStorage.setItem(
+        sessionStorage.setItem(
           "currentPage",
           hash
         );
       } else {
         setCurrentPageState("home");
 
-        localStorage.setItem(
+        sessionStorage.setItem(
           "currentPage",
           "home"
         );

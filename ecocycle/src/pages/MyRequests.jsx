@@ -54,15 +54,14 @@ function MyRequests({ setCurrentPage, setSelectedRequestId }) {
     // Save selected request ID in React state
     setSelectedRequestId(request.id);
 
-    // Also save it in localStorage
-    localStorage.setItem(
+    sessionStorage.setItem(
       "selectedRequestId",
       String(request.id)
     );
 
     console.log(
       "Saved selectedRequestId:",
-      localStorage.getItem("selectedRequestId")
+      sessionStorage.getItem("selectedRequestId")
     );
 
     // Open Track Request page

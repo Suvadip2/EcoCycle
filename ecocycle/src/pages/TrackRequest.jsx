@@ -8,7 +8,7 @@ function TrackRequest({ requestId, setCurrentPage }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedId = localStorage.getItem("selectedRequestId");
+    const savedId = sessionStorage.getItem("selectedRequestId");
 
     const finalRequestId =
       requestId || (savedId ? Number(savedId) : null);
