@@ -163,68 +163,26 @@ function TrackRequest({ requestId, setCurrentPage }) {
 
         <h3>Request Progress</h3>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "18px",
-          }}
-        >
-
+        <div className="track-progress">
           {statuses.map((status, index) => {
-
             const completed =
               index <= currentIndex;
-
             const isCurrent =
               index === currentIndex;
 
             return (
               <div
                 key={status}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                }}
+                className={[
+                  "track-progress-step",
+                  completed ? "completed" : "",
+                  isCurrent ? "current" : "",
+                ].filter(Boolean).join(" ")}
               >
-
-                <div
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    minWidth: "30px",
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: completed
-                      ? "#2e7d32"
-                      : "#eeeeee",
-                    color: completed
-                      ? "#ffffff"
-                      : "#777777",
-                    fontWeight: "bold",
-                    fontSize: "16px",
-                  }}
-                >
+                <div className="track-progress-marker">
                   {completed ? "✓" : "○"}
                 </div>
-
-                <span
-                  style={{
-                    fontSize: "15px",
-                    fontWeight: isCurrent
-                      ? "700"
-                      : "500",
-                    color: isCurrent
-                      ? "#2e7d32"
-                      : "#333333",
-                  }}
-                >
-                  {status}
-                </span>
-
+                <span className="track-progress-label">{status}</span>
               </div>
             );
           })}

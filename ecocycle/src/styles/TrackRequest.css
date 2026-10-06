@@ -61,6 +61,70 @@
   margin-bottom: 30px;
 }
 
+.track-progress {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding: 8px 4px 12px;
+}
+
+.track-progress-step {
+  position: relative;
+  display: flex;
+  flex: 1 0 0;
+  min-width: 110px;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  text-align: center;
+}
+
+.track-progress-step:not(:last-child)::after {
+  position: absolute;
+  top: 14px;
+  left: calc(50% + 15px);
+  width: calc(100% - 30px);
+  height: 3px;
+  background: #e2e8e3;
+  content: "";
+}
+
+.track-progress-step.completed:not(:last-child)::after {
+  background: #2e7d32;
+}
+
+.track-progress-marker {
+  z-index: 1;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eeeeee;
+  color: #777777;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.track-progress-step.completed .track-progress-marker {
+  background: #2e7d32;
+  color: #ffffff;
+}
+
+.track-progress-label {
+  color: #333333;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.track-progress-step.current .track-progress-label {
+  color: #2e7d32;
+  font-weight: 700;
+}
+
 .track-back-button {
   padding: 11px 20px;
   border: none;
