@@ -65,6 +65,22 @@
   background: #15803d;
 }
 
+.auth-secondary-button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 13px;
+  border: 1px solid #16a34a;
+  border-radius: 8px;
+  background: white;
+  color: #15803d;
+  font-weight: 700;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.auth-secondary-button:hover {
+  background: #f0fdf4;
+}
+
 .error-message,
 .success-message {
   padding: 11px 14px;

@@ -66,6 +66,7 @@ function Login({ setCurrentPage }) {
 
         <button
           type="button"
+          className="auth-secondary-button"
           onClick={() => setCurrentPage("register")}
         >
           Create Account
