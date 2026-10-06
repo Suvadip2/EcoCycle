@@ -214,6 +214,7 @@ function Register({ setCurrentPage }) {
 
         <button
           type="button"
+          className="auth-secondary-button"
           onClick={() =>
             setCurrentPage("login")
           }
