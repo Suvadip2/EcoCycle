@@ -113,10 +113,7 @@ function SubmitEWaste({ setCurrentPage }) {
       };
 
       await submitEWaste(payload);
-
-      setSuccess(
-        "E-waste request submitted successfully!"
-      );
+      setCurrentPage("myRequests");
 
       setForm({
         deviceName: "",
