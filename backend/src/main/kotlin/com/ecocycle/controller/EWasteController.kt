@@ -2,6 +2,7 @@ package com.ecocycle.controller
 
 import com.ecocycle.model.EWasteRequest
 import com.ecocycle.repository.EWasteRepository
+import com.ecocycle.service.EWasteRequestAnonymizer
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin(origins = ["http://localhost:5173"])
 @RequestMapping("/api/ewaste")
 class EWasteController(
-    private val ewasteRepository: EWasteRepository
+    private val ewasteRepository: EWasteRepository,
+    private val requestAnonymizer: EWasteRequestAnonymizer
 ) {
 
     @GetMapping
@@ -96,6 +98,9 @@ class EWasteController(
         val ewaste = request.get()
 
         ewaste.status = newStatus
+        if (newStatus == "Recycled") {
+            requestAnonymizer.anonymize(ewaste)
+        }
 
         val updatedRequest =
             ewasteRepository.save(ewaste)
@@ -103,4 +108,3 @@ class EWasteController(
         return ResponseEntity.ok(updatedRequest)
     }
 }
-

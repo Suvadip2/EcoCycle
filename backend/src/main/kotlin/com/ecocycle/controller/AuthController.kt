@@ -3,6 +3,7 @@ package com.ecocycle.controller
 import com.ecocycle.model.User
 import com.ecocycle.repository.EWasteRepository
 import com.ecocycle.repository.UserRepository
+import com.ecocycle.service.EWasteRequestAnonymizer
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.transaction.annotation.Transactional
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*
 class AuthController(
     private val userRepository: UserRepository,
     private val ewasteRepository: EWasteRepository,
+    private val requestAnonymizer: EWasteRequestAnonymizer,
     private val passwordEncoder: PasswordEncoder
 ) {
 
@@ -181,13 +183,7 @@ class AuthController(
         }
 
         val requests = ewasteRepository.findByUserEmail(targetUser.get().email)
-        requests.forEach { request ->
-            request.userEmail = ""
-            request.description = ""
-            request.pickupAddress = ""
-            request.pickupCity = ""
-            request.pickupPincode = ""
-        }
+        requests.forEach(requestAnonymizer::anonymize)
         ewasteRepository.saveAll(requests)
 
         userRepository.deleteById(id)

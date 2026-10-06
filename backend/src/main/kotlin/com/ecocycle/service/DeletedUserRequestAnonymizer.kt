@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional
 @Component
 class DeletedUserRequestAnonymizer(
     private val userRepository: UserRepository,
-    private val ewasteRepository: EWasteRepository
+    private val ewasteRepository: EWasteRepository,
+    private val requestAnonymizer: EWasteRequestAnonymizer
 ) : ApplicationRunner {
 
     @Transactional
@@ -21,17 +22,12 @@ class DeletedUserRequestAnonymizer(
 
         val orphanedRequests = ewasteRepository.findAll()
             .filter { request ->
-                request.userEmail.isNotBlank() &&
-                    request.userEmail.trim().lowercase() !in activeEmails
+                request.status == "Recycled" ||
+                    (request.userEmail.isNotBlank() &&
+                        request.userEmail.trim().lowercase() !in activeEmails)
             }
 
-        orphanedRequests.forEach { request ->
-            request.userEmail = ""
-            request.description = ""
-            request.pickupAddress = ""
-            request.pickupCity = ""
-            request.pickupPincode = ""
-        }
+        orphanedRequests.forEach(requestAnonymizer::anonymize)
 
         ewasteRepository.saveAll(orphanedRequests)
     }

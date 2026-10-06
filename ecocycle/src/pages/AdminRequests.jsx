@@ -9,16 +9,26 @@ function AdminRequests() {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
+    let isActive = true;
+
     const loadRequests = async () => {
       try {
         const list = await getAllEWaste();
-        setRequests(list || []);
+        if (isActive) {
+          setRequests((list || []).filter((request) => request.status !== "Recycled"));
+        }
       } catch (error) {
         console.error("Failed to load requests:", error);
       }
     };
 
     loadRequests();
+    const interval = setInterval(loadRequests, 3000);
+
+    return () => {
+      isActive = false;
+      clearInterval(interval);
+    };
   }, []);
 
   const handleStatusChange = async (id, status) => {
@@ -26,9 +36,11 @@ function AdminRequests() {
       await updateEWasteStatus(id, status);
 
       setRequests((prev) =>
-        prev.map((item) =>
-          item.id === id ? { ...item, status } : item
-        )
+        status === "Recycled"
+          ? prev.filter((item) => item.id !== id)
+          : prev.map((item) =>
+              item.id === id ? { ...item, status } : item
+            )
       );
     } catch (error) {
       console.error("Failed to update status:", error);
@@ -59,7 +71,7 @@ function AdminRequests() {
       </div>
 
       {requests.length === 0 && (
-        <p>No e-waste requests found.</p>
+        <p>No active e-waste requests. Recycled items are included in the aggregate impact totals.</p>
       )}
 
       {requests.map((request) => (
