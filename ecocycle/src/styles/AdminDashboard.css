@@ -118,7 +118,7 @@
   align-items: center;
   justify-content: center;
 
-  background: white;
+  background: #f5f7f5;
 
   border-radius: 50%;
 
@@ -174,7 +174,7 @@
 }
 
 .admin-stat-card {
-  background: white;
+  background: #f5f7f5;
 
   border: 1px solid #e2ebe4;
 
@@ -283,7 +283,7 @@
 }
 
 .secondary-card {
-  background: white;
+  background: #f5f7f5;
 
   padding: 19px 22px;
 
@@ -351,7 +351,7 @@
 }
 
 .admin-panel {
-  background: white;
+  background: #f5f7f5;
 
   border: 1px solid #e2ebe4;
 
@@ -562,7 +562,7 @@
   align-items: center;
   justify-content: center;
 
-  background: white;
+  background: #f5f7f5;
 
   border-radius: 8px;
 
@@ -603,7 +603,7 @@
 ===================================================== */
 
 .activity-table {
-  background: white;
+  background: #f5f7f5;
 
   border: 1px solid #e2ebe4;
 
