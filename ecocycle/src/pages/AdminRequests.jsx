@@ -133,7 +133,6 @@ function AdminRequests() {
               "Pickup Scheduled",
               "Collected",
               "Recycled",
-              "Rejected",
             ].map((status) => (
               <button
                 key={status}
