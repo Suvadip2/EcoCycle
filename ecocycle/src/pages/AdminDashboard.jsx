@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { getAllEWaste } from "../services/api";
+import { getAllEWaste, getAllUsers } from "../services/api";
 import { calculateCo2Saved } from "../utils/environmentalImpact";
 import "../styles/AdminDashboard.css";
 
@@ -12,10 +12,21 @@ function AdminDashboard({ setCurrentPage }) {
     co2Saved: 0,
   });
 
+  const [recentActivity, setRecentActivity] = useState([]);
+
   useEffect(() => {
     const loadDashboard = async () => {
       try {
-        const requestList = await getAllEWaste();
+        const [users, requests] = await Promise.all([
+          getAllUsers(),
+          getAllEWaste(),
+        ]);
+        const requestList = requests || [];
+        const activeUsers = new Map(
+          (users || [])
+            .filter((user) => user.role === "USER")
+            .map((user) => [user.email.trim().toLowerCase(), user])
+        );
         const collectedWeight = requestList
           .filter((item) =>
             ["Collected", "Recycled"].includes(item.status)
@@ -29,6 +40,22 @@ function AdminDashboard({ setCurrentPage }) {
           collectedWeight,
           co2Saved: calculateCo2Saved(requestList),
         });
+
+        const activity = requestList
+          .filter((request) =>
+            request.status !== "Recycled" &&
+            activeUsers.has(request.userEmail?.trim().toLowerCase())
+          )
+          .sort((left, right) => Number(right.id) - Number(left.id))
+          .slice(0, 5)
+          .map((request) => ({
+            ...request,
+            userName: activeUsers.get(
+              request.userEmail.trim().toLowerCase()
+            ).name,
+          }));
+
+        setRecentActivity(activity);
       } catch (error) {
         console.error(
           "Failed to load admin dashboard:",
@@ -188,6 +215,56 @@ function AdminDashboard({ setCurrentPage }) {
           </div>
         </div>
       </div>
+
+      <section className="admin-section">
+        <div className="section-heading">
+          <div>
+            <h2>Recent User Activity</h2>
+            <p>Latest requests from active user accounts</p>
+          </div>
+
+          <button
+            className="view-all-button"
+            onClick={() => setCurrentPage("adminRequests")}
+          >
+            View Requests
+          </button>
+        </div>
+
+        <div className="activity-table">
+          <div className="activity-header">
+            <span>Request</span>
+            <span>User</span>
+            <span>Device</span>
+            <span>Status</span>
+            <span>Date</span>
+          </div>
+
+          {recentActivity.length === 0 ? (
+            <div className="activity-row">
+              <span>No recent activity</span>
+              <span>—</span>
+              <span>—</span>
+              <span>—</span>
+              <span>—</span>
+            </div>
+          ) : (
+            recentActivity.map((request) => (
+              <div className="activity-row" key={request.id}>
+                <span>#{request.id}</span>
+                <span>{request.userName}</span>
+                <span>{request.deviceName}</span>
+                <span>{request.status}</span>
+                <span>
+                  {request.createdAt
+                    ? new Date(request.createdAt).toLocaleDateString()
+                    : "—"}
+                </span>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
 
       <div className="admin-bottom">
         <div>
