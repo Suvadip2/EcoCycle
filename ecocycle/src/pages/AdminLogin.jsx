@@ -64,6 +64,7 @@ function AdminLogin({ setCurrentPage }) {
 
         <button
           type="button"
+          className="auth-secondary-button"
           onClick={() => setCurrentPage("home")}
         >
           Back to Home
