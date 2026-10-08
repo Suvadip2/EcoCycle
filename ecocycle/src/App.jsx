@@ -18,7 +18,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminRequests from "./pages/AdminRequests";
 import AdminUsers from "./pages/AdminUsers";
 
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "./context/useAuth";
 
 function App() {
   const [currentPage, setCurrentPageState] = useState(() => {

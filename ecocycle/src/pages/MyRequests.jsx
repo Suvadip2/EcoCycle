@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { getUserEWaste, deleteEWaste } from "../services/api";
 import RequestTable from "../components/RequestTable";
 

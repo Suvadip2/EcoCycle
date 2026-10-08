@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { getAllEWaste, getAllUsers } from "../services/api";
 import { calculateCo2Saved } from "../utils/environmentalImpact";
 import "../styles/AdminDashboard.css";

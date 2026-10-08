@@ -6,18 +6,14 @@ function TrackRequest({ requestId, setCurrentPage }) {
   const [request, setRequest] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const savedId = sessionStorage.getItem("selectedRequestId");
+  const finalRequestId =
+    requestId || (savedId ? Number(savedId) : null);
 
   useEffect(() => {
-    const savedId = sessionStorage.getItem("selectedRequestId");
-
-    const finalRequestId =
-      requestId || (savedId ? Number(savedId) : null);
-
     console.log("Track Request ID:", finalRequestId);
 
     if (!finalRequestId) {
-      setError("No request selected.");
-      setLoading(false);
       return;
     }
 
@@ -42,7 +38,32 @@ function TrackRequest({ requestId, setCurrentPage }) {
     const interval = setInterval(loadRequest, 3000);
 
     return () => clearInterval(interval);
-  }, [requestId]);
+  }, [finalRequestId]);
+
+  if (!finalRequestId) {
+    return (
+      <div className="track-page">
+        <div className="track-heading">
+          <h2>Track Request</h2>
+          <p>
+            Track the current status of your e-waste request.
+          </p>
+        </div>
+
+        <p className="track-error">
+          No request selected.
+        </p>
+
+        <button
+          type="button"
+          className="track-back-button"
+          onClick={() => setCurrentPage("myRequests")}
+        >
+          Back to My Requests
+        </button>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
