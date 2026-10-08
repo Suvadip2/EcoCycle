@@ -1,21 +1,40 @@
 import { useEffect, useState } from "react";
 import {
   getAllEWaste,
+  getAllUsers,
   updateEWasteStatus,
   deleteEWaste,
 } from "../services/api";
+import "../styles/AdminRequests.css";
 
 function AdminRequests() {
   const [requests, setRequests] = useState([]);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     let isActive = true;
 
     const loadRequests = async () => {
       try {
-        const list = await getAllEWaste();
+        const [list, users] = await Promise.all([
+          getAllEWaste(),
+          getAllUsers(),
+        ]);
         if (isActive) {
-          setRequests((list || []).filter((request) => request.status !== "Recycled"));
+          const userNames = new Map(
+            (users || []).map((user) => [
+              user.email.trim().toLowerCase(),
+              user.name,
+            ])
+          );
+          setRequests((list || []).map((request) => ({
+            ...request,
+            userName: userNames.get(
+              request.userEmail?.trim().toLowerCase()
+            ) || "",
+          })));
         }
       } catch (error) {
         console.error("Failed to load requests:", error);
@@ -31,16 +50,45 @@ function AdminRequests() {
     };
   }, []);
 
+  const categories = [...new Set(
+    requests.map((request) => request.category).filter(Boolean)
+  )].sort((left, right) => left.localeCompare(right));
+  const statuses = [...new Set(
+    requests.map((request) => request.status).filter(Boolean)
+  )].sort((left, right) => left.localeCompare(right));
+  const normalizedSearch = search.trim().toLowerCase();
+  const filteredRequests = requests.filter((request) => {
+    const matchesSearch =
+      !normalizedSearch ||
+      [
+        request.userName,
+        request.userEmail,
+        request.deviceName,
+        request.category,
+        String(request.id),
+      ].some((value) =>
+        String(value || "").toLowerCase().includes(normalizedSearch)
+      );
+
+    return matchesSearch &&
+      (!category || request.category === category) &&
+      (!status || request.status === status);
+  });
+
   const handleStatusChange = async (id, status) => {
     try {
-      await updateEWasteStatus(id, status);
+      const updatedRequest = await updateEWasteStatus(id, status);
 
       setRequests((prev) =>
-        status === "Recycled"
-          ? prev.filter((item) => item.id !== id)
-          : prev.map((item) =>
-              item.id === id ? { ...item, status } : item
-            )
+        prev.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                ...updatedRequest,
+                userName: item.userName,
+              }
+            : item
+        )
       );
     } catch (error) {
       console.error("Failed to update status:", error);
@@ -70,11 +118,53 @@ function AdminRequests() {
         </div>
       </div>
 
-      {requests.length === 0 && (
-        <p>No active e-waste requests. Recycled items are included in the aggregate impact totals.</p>
-      )}
+      <div className="request-filters">
+        <label>
+          Search
+          <input
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search by user, email, device, category or ID"
+          />
+        </label>
 
-      {requests.map((request) => (
+        <label>
+          Category
+          <select value={category} onChange={(event) => setCategory(event.target.value)}>
+            <option value="">All Categories</option>
+            {categories.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </label>
+
+        <label>
+          Status
+          <select value={status} onChange={(event) => setStatus(event.target.value)}>
+            <option value="">All Statuses</option>
+            {statuses.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </label>
+
+        <button
+          type="button"
+          className="small-button"
+          onClick={() => {
+            setSearch("");
+            setCategory("");
+            setStatus("");
+          }}
+        >
+          Clear Filters
+        </button>
+      </div>
+
+      {filteredRequests.length === 0 ? (
+        <p>
+          {requests.length === 0
+            ? "No e-waste requests found."
+            : "No requests match the selected search and filters."}
+        </p>
+      ) : filteredRequests.map((request) => (
         <div
           className="admin-request-card"
           key={request.id}
@@ -137,6 +227,7 @@ function AdminRequests() {
               <button
                 key={status}
                 type="button"
+                disabled={request.status === status}
                 className={
                   request.status === status
                     ? "status-chip active"

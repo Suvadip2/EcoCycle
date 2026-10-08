@@ -22,9 +22,8 @@ class DeletedUserRequestAnonymizer(
 
         val orphanedRequests = ewasteRepository.findAll()
             .filter { request ->
-                request.status == "Recycled" ||
-                    (request.userEmail.isNotBlank() &&
-                        request.userEmail.trim().lowercase() !in activeEmails)
+                request.userEmail.isNotBlank() &&
+                    request.userEmail.trim().lowercase() !in activeEmails
             }
 
         orphanedRequests.forEach(requestAnonymizer::anonymize)

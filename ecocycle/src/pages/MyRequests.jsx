@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/useAuth";
 import { getUserEWaste, deleteEWaste } from "../services/api";
+import { downloadRecyclingReceipt } from "../utils/recyclingReceipt";
 import RequestTable from "../components/RequestTable";
 
 function MyRequests({ setCurrentPage, setSelectedRequestId }) {
@@ -90,6 +91,9 @@ function MyRequests({ setCurrentPage, setSelectedRequestId }) {
         canDelete={true}
         onView={handleView}
         onDelete={handleDelete}
+        onDownloadReceipt={(request) =>
+          downloadRecyclingReceipt(request, currentUser)
+        }
       />
     </div>
   );

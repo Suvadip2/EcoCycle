@@ -1,4 +1,10 @@
-function RequestTable({ requests = [], onView, onDelete, canDelete = false }) {
+function RequestTable({
+  requests = [],
+  onView,
+  onDelete,
+  onDownloadReceipt,
+  canDelete = false,
+}) {
   return (
     <div className="table-wrapper">
       <table className="request-table">
@@ -46,6 +52,15 @@ function RequestTable({ requests = [], onView, onDelete, canDelete = false }) {
                   <button type="button" className="small-button" onClick={() => onView(request)}>
                     View
                   </button>
+                  {request.status === "Recycled" && onDownloadReceipt && (
+                    <button
+                      type="button"
+                      className="small-button"
+                      onClick={() => onDownloadReceipt(request)}
+                    >
+                      Receipt
+                    </button>
+                  )}
                   {canDelete && (
                     <button type="button" className="small-button danger" onClick={() => onDelete(request.id)}>
                       Delete

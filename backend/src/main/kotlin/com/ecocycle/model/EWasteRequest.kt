@@ -48,7 +48,10 @@ class EWasteRequest(
     var pickupPincode: String = "",
 
     @Column(name = "created_at", nullable = true, updatable = false)
-    var createdAt: LocalDateTime? = null
+    var createdAt: LocalDateTime? = null,
+
+    @Column(name = "recycled_at")
+    var recycledAt: LocalDateTime? = null
 ) {
     @PrePersist
     fun setCreatedAt() {

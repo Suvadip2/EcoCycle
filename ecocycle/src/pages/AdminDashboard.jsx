@@ -10,6 +10,11 @@ function AdminDashboard({ setCurrentPage }) {
   const [stats, setStats] = useState({
     collectedWeight: 0,
     co2Saved: 0,
+    totalRequests: 0,
+    pendingRequests: 0,
+    collectedRequests: 0,
+    recycledRequests: 0,
+    categories: [],
   });
 
   const [recentActivity, setRecentActivity] = useState([]);
@@ -33,12 +38,29 @@ function AdminDashboard({ setCurrentPage }) {
           )
           .reduce(
             (total, item) => total + Number(item.weight || 0),
-          0
-        );
+            0
+          );
 
         setStats({
           collectedWeight,
           co2Saved: calculateCo2Saved(requestList),
+          totalRequests: requestList.length,
+          pendingRequests: requestList.filter(
+            (item) => item.status === "Pending"
+          ).length,
+          collectedRequests: requestList.filter(
+            (item) => item.status === "Collected"
+          ).length,
+          recycledRequests: requestList.filter(
+            (item) => item.status === "Recycled"
+          ).length,
+          categories: Object.entries(
+            requestList.reduce((counts, item) => {
+              const category = item.category || "Uncategorized";
+              counts[category] = (counts[category] || 0) + 1;
+              return counts;
+            }, {})
+          ).sort(([left], [right]) => left.localeCompare(right)),
         });
 
         const activity = requestList
@@ -115,6 +137,42 @@ function AdminDashboard({ setCurrentPage }) {
         </div>
 
         <div className="admin-stats">
+          <div className="admin-stat-card request-stat-card">
+            <div className="admin-stat-icon green">📋</div>
+            <div>
+              <span>Total Requests</span>
+              <h3>{stats.totalRequests}</h3>
+              <small>All requests</small>
+            </div>
+          </div>
+
+          <div className="admin-stat-card request-stat-card">
+            <div className="admin-stat-icon purple">⏳</div>
+            <div>
+              <span>Pending Requests</span>
+              <h3>{stats.pendingRequests}</h3>
+              <small>Awaiting processing</small>
+            </div>
+          </div>
+
+          <div className="admin-stat-card request-stat-card">
+            <div className="admin-stat-icon green">✅</div>
+            <div>
+              <span>Collected Requests</span>
+              <h3>{stats.collectedRequests}</h3>
+              <small>Collected from users</small>
+            </div>
+          </div>
+
+          <div className="admin-stat-card request-stat-card">
+            <div className="admin-stat-icon purple">♻️</div>
+            <div>
+              <span>Recycled Requests</span>
+              <h3>{stats.recycledRequests}</h3>
+              <small>Recycling completed</small>
+            </div>
+          </div>
+
           <div className="admin-stat-card">
             <div className="admin-stat-icon green">
               ⚖️
@@ -138,6 +196,30 @@ function AdminDashboard({ setCurrentPage }) {
               <small>From recycled e-waste</small>
             </div>
           </div>
+        </div>
+
+        <div className="category-statistics">
+          <h3>Category Distribution</h3>
+          {stats.categories.length === 0 ? (
+            <p>No request categories yet.</p>
+          ) : (
+            <div className="category-stat-list">
+              {stats.categories.map(([category, count]) => (
+                <div className="category-stat-row" key={category}>
+                  <span>{category}</span>
+                  <div className="category-stat-track">
+                    <div
+                      className="category-stat-fill"
+                      style={{
+                        width: `${(count / stats.totalRequests) * 100}%`,
+                      }}
+                    />
+                  </div>
+                  <strong>{count}</strong>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -2,16 +2,15 @@ package com.ecocycle.controller
 
 import com.ecocycle.model.EWasteRequest
 import com.ecocycle.repository.EWasteRepository
-import com.ecocycle.service.EWasteRequestAnonymizer
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDateTime
 
 @RestController
 @CrossOrigin(origins = ["http://localhost:5173"])
 @RequestMapping("/api/ewaste")
 class EWasteController(
-    private val ewasteRepository: EWasteRepository,
-    private val requestAnonymizer: EWasteRequestAnonymizer
+    private val ewasteRepository: EWasteRepository
 ) {
 
     @GetMapping
@@ -25,6 +24,7 @@ class EWasteController(
     ): ResponseEntity<EWasteRequest> {
 
         request.status = "Pending"
+        request.recycledAt = null
 
         val savedRequest =
             ewasteRepository.save(request)
@@ -98,9 +98,8 @@ class EWasteController(
         val ewaste = request.get()
 
         ewaste.status = newStatus
-        if (newStatus == "Recycled") {
-            requestAnonymizer.anonymize(ewaste)
-        }
+        ewaste.recycledAt =
+            if (newStatus == "Recycled") ewaste.recycledAt ?: LocalDateTime.now() else null
 
         val updatedRequest =
             ewasteRepository.save(ewaste)

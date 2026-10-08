@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../context/useAuth";
 import { getEWasteById } from "../services/api";
+import { downloadRecyclingReceipt } from "../utils/recyclingReceipt";
 import "../styles/TrackRequest.css";
 
 function TrackRequest({ requestId, setCurrentPage }) {
+  const { currentUser } = useAuth();
   const [request, setRequest] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -211,6 +214,16 @@ function TrackRequest({ requestId, setCurrentPage }) {
         </div>
 
       </div>
+
+      {request.status === "Recycled" && (
+        <button
+          type="button"
+          className="track-receipt-button"
+          onClick={() => downloadRecyclingReceipt(request, currentUser)}
+        >
+          Download Recycling Receipt
+        </button>
+      )}
 
       <button
         type="button"

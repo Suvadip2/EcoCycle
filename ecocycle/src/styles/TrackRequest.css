@@ -139,6 +139,19 @@
   background: #256628;
 }
 
+.track-receipt-button {
+  padding: 11px 20px;
+  margin: 0 10px 20px 0;
+  border-radius: 7px;
+  background: #14532d;
+  color: white;
+  font-size: 14px;
+}
+
+.track-receipt-button:hover {
+  background: #166534;
+}
+
 .track-error {
   padding: 14px 18px;
   margin-bottom: 20px;
