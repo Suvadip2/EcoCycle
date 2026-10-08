@@ -5,7 +5,15 @@ import {
   updateEWasteStatus,
   deleteEWaste,
 } from "../services/api";
+import { downloadRecyclingReceipt } from "../utils/recyclingReceipt";
 import "../styles/AdminRequests.css";
+
+const ACTIVE_STATUSES = [
+  "Pending",
+  "Accepted",
+  "Pickup Scheduled",
+  "Collected",
+];
 
 function AdminRequests() {
   const [requests, setRequests] = useState([]);
@@ -74,6 +82,12 @@ function AdminRequests() {
       (!category || request.category === category) &&
       (!status || request.status === status);
   });
+  const activeRequests = filteredRequests.filter((request) =>
+    ACTIVE_STATUSES.includes(request.status)
+  );
+  const recycledRequests = filteredRequests.filter(
+    (request) => request.status === "Recycled"
+  );
 
   const handleStatusChange = async (id, status) => {
     try {
@@ -158,13 +172,19 @@ function AdminRequests() {
         </button>
       </div>
 
-      {filteredRequests.length === 0 ? (
+      {requests.length === 0 ? (
         <p>
-          {requests.length === 0
-            ? "No e-waste requests found."
-            : "No requests match the selected search and filters."}
+          No e-waste requests found.
         </p>
-      ) : filteredRequests.map((request) => (
+      ) : filteredRequests.length === 0 ? (
+        <p>No requests match the selected search and filters.</p>
+      ) : null}
+
+      <section className="admin-request-section">
+        <h3 className="admin-request-section-title">ACTIVE REQUESTS</h3>
+        {activeRequests.length === 0 ? (
+          <p className="admin-request-empty">No active requests match these filters.</p>
+        ) : activeRequests.map((request) => (
         <div
           className="admin-request-card"
           key={request.id}
@@ -217,30 +237,19 @@ function AdminRequests() {
           </div>
 
           <div className="status-actions">
-            {[
-              "Pending",
-              "Accepted",
-              "Pickup Scheduled",
-              "Collected",
-              "Recycled",
-            ].map((status) => (
+            {ACTIVE_STATUSES.concat("Recycled").map((nextStatus) => (
               <button
-                key={status}
+                key={nextStatus}
                 type="button"
-                disabled={request.status === status}
+                disabled={request.status === nextStatus}
                 className={
-                  request.status === status
+                  request.status === nextStatus
                     ? "status-chip active"
                     : "status-chip"
                 }
-                onClick={() =>
-                  handleStatusChange(
-                    request.id,
-                    status
-                  )
-                }
+                onClick={() => handleStatusChange(request.id, nextStatus)}
               >
-                {status}
+                {nextStatus}
               </button>
             ))}
 
@@ -256,6 +265,52 @@ function AdminRequests() {
           </div>
         </div>
       ))}
+      </section>
+
+      <section className="admin-request-section">
+        <h3 className="admin-request-section-title">RECYCLED REQUESTS</h3>
+        {recycledRequests.length === 0 ? (
+          <p className="admin-request-empty">No recycled requests match these filters.</p>
+        ) : recycledRequests.map((request) => (
+          <div className="admin-request-card recycled-request-card" key={request.id}>
+            <div className="request-header">
+              <strong>#{request.id}</strong>
+              <span>{request.deviceName}</span>
+            </div>
+
+            <div className="request-meta">
+              <p>
+                <strong>User:</strong>{" "}
+                {request.userName || request.userEmail || "EcoCycle User"}
+              </p>
+              <p><strong>Category:</strong> {request.category}</p>
+              <p><strong>Weight:</strong> {request.weight} Kg</p>
+              <p><strong>Status:</strong> Recycled</p>
+              <p>
+                <strong>Recycling Date:</strong>{" "}
+                {request.recycledAt
+                  ? new Date(request.recycledAt).toLocaleString()
+                  : "Not recorded"}
+              </p>
+            </div>
+
+            <div className="status-actions">
+              <button
+                type="button"
+                className="small-button"
+                onClick={() =>
+                  downloadRecyclingReceipt(request, {
+                    name: request.userName,
+                    email: request.userEmail,
+                  })
+                }
+              >
+                Download Receipt
+              </button>
+            </div>
+          </div>
+        ))}
+      </section>
     </div>
   );
 }

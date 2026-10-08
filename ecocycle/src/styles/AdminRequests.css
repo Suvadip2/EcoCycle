@@ -33,6 +33,30 @@
   white-space: nowrap;
 }
 
+.admin-request-section {
+  margin-top: 30px;
+}
+
+.admin-request-section-title {
+  padding-bottom: 10px;
+  margin: 0 0 16px;
+  border-bottom: 2px solid #dce6de;
+  color: #14532d;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+
+.admin-request-empty {
+  padding: 14px 18px;
+  border: 1px dashed #cbd8ce;
+  border-radius: 10px;
+  color: #68756d;
+}
+
+.recycled-request-card {
+  border-left: 4px solid #16a34a;
+}
+
 .status-actions button:disabled {
   cursor: default;
   opacity: 0.7;

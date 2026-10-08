@@ -11,6 +11,7 @@
     "mock-api": "node mock-server.js"
   },
   "dependencies": {
+    "jspdf": "^4.2.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
