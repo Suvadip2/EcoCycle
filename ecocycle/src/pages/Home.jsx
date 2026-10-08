@@ -1,8 +1,10 @@
 import "../styles/Home.css";
+import About from "./About";
+import Categories from "./Categories";
 
 function Home({ setCurrentPage }) {
   return (
-    <div className="home-page">
+    <div className="home-page" id="home">
       <section className="hero-section">
         <div className="hero-content">
           <h1>
@@ -78,6 +80,9 @@ function Home({ setCurrentPage }) {
           Get Started
         </button>
       </section>
+
+      <About />
+      <Categories />
     </div>
   );
 }

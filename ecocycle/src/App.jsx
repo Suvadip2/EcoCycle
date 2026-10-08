@@ -4,8 +4,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Categories from "./pages/Categories";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminLogin from "./pages/AdminLogin";
@@ -27,6 +25,7 @@ function App() {
     const pageFromUrl = window.location.hash.replace("#", "");
     return pageFromUrl || sessionStorage.getItem("currentPage") || "home";
   });
+  const [navigationVersion, setNavigationVersion] = useState(0);
 
   const [selectedRequestId, setSelectedRequestId] = useState(() => {
     const savedId = sessionStorage.getItem("selectedRequestId");
@@ -43,6 +42,7 @@ function App() {
 
   const setCurrentPage = (page) => {
     setCurrentPageState(page);
+    setNavigationVersion((version) => version + 1);
 
     sessionStorage.setItem(
       "currentPage",
@@ -63,6 +63,7 @@ function App() {
 
   useEffect(() => {
     const handlePopState = (event) => {
+      setNavigationVersion((version) => version + 1);
 
       if (event.state?.page) {
         setCurrentPageState(
@@ -128,7 +129,18 @@ function App() {
         `#${currentPage}`
       );
     }
-  }, []);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (currentPage === "about" || currentPage === "categories") {
+      document.getElementById(currentPage)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else if (currentPage === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [currentPage, navigationVersion]);
 
 
   const renderPage = () => {
@@ -137,20 +149,16 @@ function App() {
        PUBLIC PAGES
     ========================= */
 
-    if (currentPage === "home") {
+    if (
+      currentPage === "home" ||
+      currentPage === "about" ||
+      currentPage === "categories"
+    ) {
       return (
         <Home
           setCurrentPage={setCurrentPage}
         />
       );
-    }
-
-    if (currentPage === "about") {
-      return <About />;
-    }
-
-    if (currentPage === "categories") {
-      return <Categories />;
     }
 
     if (currentPage === "login") {

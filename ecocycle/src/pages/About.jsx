@@ -2,7 +2,7 @@ import "../styles/About.css";
 
 function About() {
   return (
-    <div className="about-page">
+    <div className="about-page" id="about">
 
       {/* ABOUT HERO */}
 

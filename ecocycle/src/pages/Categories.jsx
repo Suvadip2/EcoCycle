@@ -35,7 +35,7 @@ function Categories() {
   ];
 
   return (
-    <div className="categories-page">
+    <div className="categories-page" id="categories">
 
       {/* HEADER */}
 

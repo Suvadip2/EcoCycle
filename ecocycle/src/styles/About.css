@@ -1,5 +1,6 @@
 .about-page {
   min-height: calc(100vh - 76px);
+  scroll-margin-top: 90px;
 }
 
 /* HEADER */
