@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminLogin from "./pages/AdminLogin";
+import AdminRegister from "./pages/AdminRegister";
 
 import UserDashboard from "./pages/UserDashboard";
 import SubmitEWaste from "./pages/SubmitEWaste";
@@ -180,6 +181,14 @@ function App() {
     if (currentPage === "adminLogin") {
       return (
         <AdminLogin
+          setCurrentPage={setCurrentPage}
+        />
+      );
+    }
+
+    if (currentPage === "adminRegister") {
+      return (
+        <AdminRegister
           setCurrentPage={setCurrentPage}
         />
       );

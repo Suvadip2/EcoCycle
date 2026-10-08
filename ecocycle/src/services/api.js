@@ -28,6 +28,24 @@ export async function registerUser(userData) {
   return data;
 }
 
+export async function registerAdmin(adminData) {
+  const response = await fetch(`${API_URL}/auth/admin/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(adminData),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Admin registration failed");
+  }
+
+  return data;
+}
+
 export async function loginUser(email, password) {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: "POST",

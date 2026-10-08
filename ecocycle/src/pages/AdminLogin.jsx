@@ -65,6 +65,14 @@ function AdminLogin({ setCurrentPage }) {
         <button
           type="button"
           className="auth-secondary-button"
+          onClick={() => setCurrentPage("adminRegister")}
+        >
+          Register as Admin
+        </button>
+
+        <button
+          type="button"
+          className="auth-secondary-button"
           onClick={() => setCurrentPage("home")}
         >
           Back to Home

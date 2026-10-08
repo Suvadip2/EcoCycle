@@ -4,10 +4,14 @@ import com.ecocycle.model.User
 import com.ecocycle.repository.EWasteRepository
 import com.ecocycle.repository.UserRepository
 import com.ecocycle.service.EWasteRequestAnonymizer
+import com.ecocycle.dto.AdminRegistrationRequest
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
+import java.security.MessageDigest
+import java.nio.charset.StandardCharsets
 
 @RestController
 @CrossOrigin(origins = ["http://localhost:5173"])
@@ -16,7 +20,8 @@ class AuthController(
     private val userRepository: UserRepository,
     private val ewasteRepository: EWasteRepository,
     private val requestAnonymizer: EWasteRequestAnonymizer,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    @Value("\${ecocycle.admin-code:}") private val adminCode: String
 ) {
 
     @PostMapping("/register")
@@ -53,6 +58,61 @@ class AuthController(
         return ResponseEntity.ok(
             mapOf(
                 "message" to "Registration successful",
+                "userId" to savedUser.id
+            )
+        )
+    }
+
+    @PostMapping("/admin/register")
+    fun registerAdmin(
+        @RequestBody request: AdminRegistrationRequest
+    ): ResponseEntity<Any> {
+        if (adminCode.isBlank()) {
+            return ResponseEntity
+                .internalServerError()
+                .body(mapOf("message" to "Admin registration is not configured"))
+        }
+
+        if (request.adminCode.isBlank() || !MessageDigest.isEqual(
+                request.adminCode.toByteArray(StandardCharsets.UTF_8),
+                adminCode.toByteArray(StandardCharsets.UTF_8)
+            )
+        ) {
+            return ResponseEntity
+                .badRequest()
+                .body(mapOf("message" to "Invalid Admin Code."))
+        }
+
+        if (request.name.isBlank() || request.email.isBlank() || request.password.isBlank()) {
+            return ResponseEntity
+                .badRequest()
+                .body(mapOf("message" to "Name, email and password are required"))
+        }
+
+        if (userRepository.findByEmail(request.email) != null) {
+            return ResponseEntity
+                .badRequest()
+                .body(mapOf("message" to "Email already registered"))
+        }
+
+        val encodedPassword = passwordEncoder.encode(request.password)
+            ?: return ResponseEntity
+                .internalServerError()
+                .body(mapOf("message" to "Password encryption failed"))
+
+        val savedUser = userRepository.save(
+            User(
+                name = request.name,
+                email = request.email,
+                password = encodedPassword,
+                phone = "",
+                role = "ADMIN"
+            )
+        )
+
+        return ResponseEntity.ok(
+            mapOf(
+                "message" to "Admin registration successful",
                 "userId" to savedUser.id
             )
         )
