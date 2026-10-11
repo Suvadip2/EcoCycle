@@ -19,6 +19,7 @@ npm run mock-api
 In the second terminal, start the frontend:
 
 ```powershell
+$env:VITE_API_URL = "http://localhost:8080/api"
 npm run dev
 ```
 

@@ -19,7 +19,7 @@ EcoCycle is an e-waste management project with a React frontend and a Kotlin/Spr
    .\mvnw.cmd spring-boot:run
    ```
 
-The backend listens on `http://localhost:8080`.
+The backend listens on `http://localhost:8081` by default. Set the `SERVER_PORT` environment variable to override the port.
 
 ## Run the frontend
 
@@ -28,6 +28,7 @@ In another terminal:
 ```powershell
 cd ecocycle
 npm ci
+$env:VITE_API_URL = "http://localhost:8081/api"
 npm run dev
 ```
 
